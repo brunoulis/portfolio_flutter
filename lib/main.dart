@@ -14,6 +14,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Portfolio Bruno Vazquez',
       theme: ThemeData(
+        useMaterial3: true,
         // This is the theme of your application.
         //
         // TRY THIS: Try running your application with "flutter run". You'll see
@@ -29,8 +30,23 @@ class MyApp extends StatelessWidget {
         //
         // This works for code too, not just values: Most code changes can be
         // tested with just a hot reload.
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
+        // #23272a
+        colorScheme:const ColorScheme(
+  primary: Color(0xFF23272A),
+  
+  secondary: Colors.white,
+  
+  surface: Color(0xFF23272A),
+  background: Colors.white,
+  error: Color(0xFF23272A),
+  onPrimary: Color(0xFF23272A),
+  onSecondary:Colors.white,
+  onSurface: Color(0xFF23272A),
+  onBackground: Colors.white,
+  onError: Color(0xFF23272A),
+  brightness: Brightness.light,
+  
+),
       ),
       home: const MyHomePage(title: 'Portfolio Bruno Vazquez'),
     );
