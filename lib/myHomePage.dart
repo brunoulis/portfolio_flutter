@@ -1,5 +1,7 @@
 
 import 'package:flutter/material.dart';
+import 'package:portfolio_flutter/themeprovider.dart';
+import 'package:provider/provider.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
@@ -32,6 +34,13 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: Text(widget.title),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.brightness_4),
+            onPressed: () {
+              Provider.of<ThemeProvider>(context, listen: false).toggleTheme();
+            },
+          ),],
       ),
       body: Center(
 
@@ -49,7 +58,10 @@ class _MyHomePageState extends State<MyHomePage> {
           ],
         ),
       ),
+      
+      
       floatingActionButton: FloatingActionButton(
+        heroTag: "btn1",
         onPressed: _incrementCounter,
         tooltip: 'Increment',
         child: const Icon(Icons.add),
