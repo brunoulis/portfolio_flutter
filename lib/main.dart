@@ -31,22 +31,19 @@ class MyApp extends StatelessWidget {
         // This works for code too, not just values: Most code changes can be
         // tested with just a hot reload.
         // #23272a
-        colorScheme:const ColorScheme(
-  primary: Color(0xFF23272A),
-  
-  secondary: Colors.white,
-  
-  surface: Color(0xFF23272A),
-  background: Colors.white,
-  error: Color(0xFF23272A),
-  onPrimary: Color(0xFF23272A),
-  onSecondary:Colors.white,
-  onSurface: Color(0xFF23272A),
-  onBackground: Colors.white,
-  onError: Color(0xFF23272A),
-  brightness: Brightness.light,
-  
-),
+        colorScheme: const ColorScheme(
+          primary: Colors.white,
+          secondary: Colors.white,
+          surface: Color(0xFF23272A),
+          background: Colors.white,
+          error: Color(0xFF23272A),
+          onPrimary: Color(0xFF23272A),
+          onSecondary: Colors.white,
+          onSurface: Colors.white,
+          onBackground: Color(0xFF23272A),
+          onError: Color(0xFF23272A),
+          brightness: Brightness.light,
+        ),
       ),
       home: const MyHomePage(title: 'Portfolio Bruno Vazquez'),
     );
