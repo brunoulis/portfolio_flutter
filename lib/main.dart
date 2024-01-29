@@ -22,11 +22,11 @@ class MyApp extends StatelessWidget {
       title: 'Portfolio Bruno Vazquez',
       themeMode: Provider.of<ThemeProvider>(context).isDarkMode ? ThemeMode.dark : ThemeMode.light,
       theme: ThemeData(
-        colorScheme: ColorScheme
+        colorScheme: const ColorScheme
             .light(), // Aquí puedes definir tu esquema de color claro
       ),
       darkTheme: ThemeData(
-        colorScheme: ColorScheme.dark(
+        colorScheme: const ColorScheme.dark(
           primary: Colors
               .white, // Color principal de la aplicación, usado en componentes como AppBar, FloatingActionButton, etc.
           secondary: Colors
