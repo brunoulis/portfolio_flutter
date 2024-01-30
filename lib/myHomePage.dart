@@ -1,13 +1,12 @@
-
 import 'package:flutter/material.dart';
 import 'package:portfolio_flutter/themeprovider.dart';
 import 'package:provider/provider.dart';
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
+  const MyHomePage({super.key, required this.title,required this.isIos});
 
   final String title;
+  final bool isIos;
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
@@ -35,17 +34,26 @@ class _MyHomePageState extends State<MyHomePage> {
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: Text(widget.title),
         actions: [
-          IconButton(
+          /*IconButton(
             icon: const Icon(Icons.brightness_4),
             onPressed: () {
               Provider.of<ThemeProvider>(context, listen: false).toggleTheme();
             },
-          ),],
+          ),*/
+          IconButton(
+            icon: Icon(
+              Provider.of<ThemeProvider>(context).isDarkMode
+                  ? Icons.brightness_4
+                  : Icons.brightness_high,
+            ),
+            onPressed: () {
+              Provider.of<ThemeProvider>(context, listen: false).toggleTheme();
+            },
+          ),
+        ],
       ),
       body: Center(
-
         child: Column(
-         
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             const Text(
@@ -58,8 +66,7 @@ class _MyHomePageState extends State<MyHomePage> {
           ],
         ),
       ),
-      
-      
+
       floatingActionButton: FloatingActionButton(
         heroTag: "btn1",
         onPressed: _incrementCounter,

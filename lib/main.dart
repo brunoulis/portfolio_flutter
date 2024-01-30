@@ -1,7 +1,11 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:portfolio_flutter/myHomePage.dart';
 import 'package:portfolio_flutter/themeprovider.dart';
 import 'package:provider/provider.dart';
+import 'package:firebase_core/firebase_core.dart';
+//import 'firebase_options.dart';
 
 void main() {
   runApp(
@@ -14,6 +18,16 @@ void main() {
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
+
+
+  // Funcion que servira par detectar el sistema operativo y mostrar el icono correspondiente
+  bool isIOS() {
+    if (Platform.isIOS || Platform.isMacOS) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 
   // This widget is the root of your application.
   @override
@@ -68,7 +82,7 @@ class MyApp extends StatelessWidget {
         ),
       ),
       */
-      home: const MyHomePage(title: 'Portfolio Bruno Vazquez'),
+      home: MyHomePage(title: 'Portfolio Bruno Vazquez', isIos: isIOS()),
     );
   }
 }
