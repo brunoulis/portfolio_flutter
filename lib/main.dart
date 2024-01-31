@@ -34,10 +34,41 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Portfolio Bruno Vazquez',
-      themeMode: Provider.of<ThemeProvider>(context).isDarkMode ? ThemeMode.dark : ThemeMode.light,
+      themeMode: Provider.of<ThemeProvider>(context).isDarkMode
+          ? ThemeMode.dark
+          : ThemeMode.light,
       theme: ThemeData(
-        colorScheme: const ColorScheme
-            .light(), // Aquí puedes definir tu esquema de color claro
+        colorScheme: const ColorScheme.light(
+          primary: Colors
+              .black, // Color principal de la aplicación, usado en componentes como AppBar, FloatingActionButton, etc.
+          secondary: Colors
+              .black, // Color secundario, usado en componentes secundarios y widgets interactivos.
+          surface: Color(
+              0xFF23272A), // Color de elementos de superficie como Card, Dialog, Drawer, etc.
+          background: Colors
+              .white, // Color de fondo de los componentes de la interfaz de usuario.
+          error: Color(0xFF23272A), // Color utilizado para indicar errores.
+          onPrimary: Color(
+              0xFF23272A), // Color de un texto o icono cuando se coloca sobre un fondo primary.
+          onSecondary: Color(
+              0xFF23272A), // Color de un texto o icono cuando se coloca sobre un fondo secondary.
+          onSurface: Colors
+              .black, // Color de un texto o icono cuando se coloca sobre un fondo surface.
+          onBackground: Color.fromARGB(255, 224, 224,
+              224), // Color de un texto o icono cuando se coloca sobre un fondo background.
+          onError: Color(
+              0xFF23272A), // Color de un texto o icono cuando se coloca sobre un fondo error.
+          brightness: Brightness
+              .light, // Define si el tema es claro u oscuro. En este caso, es Brightness.light, lo que significa que el tema es claro.
+        ),
+        appBarTheme: const AppBarTheme(
+            backgroundColor: Colors.red,
+            foregroundColor: Colors.white // Cambia el color a tu preferencia
+            ),
+        // Thema para los icon buttons
+        iconTheme: const IconThemeData(
+          color: Colors.white,
+        ),
       ),
       darkTheme: ThemeData(
         colorScheme: const ColorScheme.dark(
@@ -62,7 +93,22 @@ class MyApp extends StatelessWidget {
               0xFF23272A), // Color de un texto o icono cuando se coloca sobre un fondo error.
           brightness: Brightness
               .dark, // Define si el tema es claro u oscuro. En este caso, es Brightness.light, lo que significa que el tema es claro.
-        ), // Aquí puedes definir tu esquema de color oscuro
+        ),
+        appBarTheme: const AppBarTheme(
+            // backgroundColor: Colors.black,
+            foregroundColor: Color.fromARGB(255, 226, 205, 10) // Cambia el color a tu preferencia
+            ),
+        iconTheme: const IconThemeData(
+          color: Colors.black, // Cambia el color a tu preferencia
+        ),
+        sliderTheme: const SliderThemeData(
+          activeTrackColor: Colors.orange, // Cambia el color a tu preferencia
+          thumbColor: Colors.orange, // Cambia el color a tu preferencia
+        ),
+        floatingActionButtonTheme:const  FloatingActionButtonThemeData(
+          backgroundColor: Color.fromARGB(255, 226, 205, 10), // Cambia el color a tu preferencia
+        ),
+        // Thema para los icon buttons
       ),
       /* theme: ThemeData(
         useMaterial3: true,
