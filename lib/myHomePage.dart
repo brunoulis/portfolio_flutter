@@ -3,7 +3,7 @@ import 'package:portfolio_flutter/themeprovider.dart';
 import 'package:provider/provider.dart';
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title,required this.isIos});
+  const MyHomePage({super.key, required this.title, required this.isIos});
 
   final String title;
   final bool isIos;
@@ -31,7 +31,6 @@ class _MyHomePageState extends State<MyHomePage> {
     // than having to individually change instances of widgets.
     return Scaffold(
       appBar: AppBar(
-       
         title: Text(widget.title),
         actions: [
           /*IconButton(
@@ -52,27 +51,40 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ],
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              
-            ),
-          ],
+      body: SingleChildScrollView(
+        child: Center(
+          child: Column(
+            children: <Widget>[
+              const SizedBox(height: 20), // Espacio en la parte superior
+              Container(
+                width: 200, // Ajusta el tamaño según tus necesidades
+                height: 200, // Ajusta el tamaño según tus necesidades
+                decoration:const  BoxDecoration(
+                  image: DecorationImage(
+                    image: NetworkImage('URL_DE_TU_IMAGEN_DE_FONDO'),
+                    fit: BoxFit.cover,
+                  ),
+                  shape: BoxShape.circle,
+                ),
+                child:const  CircleAvatar(
+                  radius: 100,
+                  backgroundImage: NetworkImage('URL_DE_TU_IMAGEN'),
+                ),
+              ),
+              const SizedBox(height: 20), // Espacio después de la imagen
+              const Text(
+                'Bruno Vazquez',
+                style: TextStyle(
+                  fontSize: 22,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              const SizedBox(height: 20), // Espacio después del nombre
+              // Aquí puedes seguir añadiendo más widgets que quieras mostrar en tu página de portfolio.
+            ],
+          ),
         ),
       ),
-
-      floatingActionButton: FloatingActionButton(
-        heroTag: "btn1",
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
