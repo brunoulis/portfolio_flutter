@@ -5,13 +5,15 @@ import 'package:portfolio_flutter/myHomePage.dart';
 import 'package:portfolio_flutter/themeprovider.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
+
 //import 'firebase_options.dart';
 
 void main() {
   runApp(
     ChangeNotifierProvider(
       create: (_) => ThemeProvider(),
-      child: MyApp(),
+      child: const MyApp(),
     ),
   );
 }
@@ -19,10 +21,10 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-
-  // Funcion que servira par detectar el sistema operativo y mostrar el icono correspondiente
   bool isIOS() {
-    if (Platform.isIOS || Platform.isMacOS) {
+    if (kIsWeb) {
+      return false; // O devuelve lo que sea apropiado en tu caso para la web.
+    } else if (Platform.isIOS || Platform.isMacOS) {
       return true;
     } else {
       return false;
@@ -69,6 +71,10 @@ class MyApp extends StatelessWidget {
         iconTheme: const IconThemeData(
           color: Colors.white,
         ),
+        floatingActionButtonTheme: const FloatingActionButtonThemeData(
+            backgroundColor: Colors.red,
+            foregroundColor: Colors.white // Cambia el color a tu preferencia
+            ),
       ),
       darkTheme: ThemeData(
         colorScheme: const ColorScheme.dark(
@@ -96,17 +102,20 @@ class MyApp extends StatelessWidget {
         ),
         appBarTheme: const AppBarTheme(
             // backgroundColor: Colors.black,
-            foregroundColor: Color.fromARGB(255, 226, 205, 10) // Cambia el color a tu preferencia
+            foregroundColor: Color.fromARGB(
+                255, 226, 205, 10) // Cambia el color a tu preferencia
             ),
         iconTheme: const IconThemeData(
           color: Colors.black, // Cambia el color a tu preferencia
         ),
         sliderTheme: const SliderThemeData(
-          activeTrackColor: Colors.orange, // Cambia el color a tu preferencia
-          thumbColor: Colors.orange, // Cambia el color a tu preferencia
+          activeTrackColor: Color.fromARGB(
+              255, 226, 205, 10), // Cambia el color a tu preferencia
+          thumbColor: Colors.white, // Cambia el color a tu preferencia
         ),
-        floatingActionButtonTheme:const  FloatingActionButtonThemeData(
-          backgroundColor: Color.fromARGB(255, 226, 205, 10), // Cambia el color a tu preferencia
+        floatingActionButtonTheme: const FloatingActionButtonThemeData(
+          backgroundColor: Color.fromARGB(255, 226, 205, 10),
+          foregroundColor: Colors.black, // Cambia el color a tu preferencia
         ),
         // Thema para los icon buttons
       ),
