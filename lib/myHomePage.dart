@@ -59,16 +59,18 @@ class _MyHomePageState extends State<MyHomePage> {
               Container(
                 width: 200, // Ajusta el tamaño según tus necesidades
                 height: 200, // Ajusta el tamaño según tus necesidades
-                decoration:const  BoxDecoration(
+                decoration: const BoxDecoration(
                   image: DecorationImage(
-                    image: NetworkImage('URL_DE_TU_IMAGEN_DE_FONDO'),
+                    image: AssetImage(
+                        'ruta_a_tu_imagen_de_fondo_en_assets'), // Cambia esto por la ruta de tu imagen de fondo en los assets
                     fit: BoxFit.cover,
                   ),
                   shape: BoxShape.circle,
                 ),
-                child:const  CircleAvatar(
+                child: const CircleAvatar(
                   radius: 100,
-                  backgroundImage: NetworkImage('URL_DE_TU_IMAGEN'),
+                  backgroundImage: AssetImage(
+                      'ruta_a_tu_imagen_en_assets'), // Cambia esto por la ruta de tu imagen en los assets
                 ),
               ),
               const SizedBox(height: 20), // Espacio después de la imagen
@@ -81,6 +83,17 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
               const SizedBox(height: 20), // Espacio después del nombre
               // Aquí puedes seguir añadiendo más widgets que quieras mostrar en tu página de portfolio.
+              const Wrap(
+                children: [
+                  Text(
+                    '¡Hola! Soy Bruno Vazquez, desarrollador de aplicaciones móviles y web. Me encanta aprender cosas nuevas y compartir mis conocimientos con los demás. Si tienes alguna pregunta, no dudes en contactarme.',
+                    style: TextStyle(
+                      fontSize: 16,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                ],
+              ),
             ],
           ),
         ),
