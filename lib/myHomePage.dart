@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+
 import 'package:portfolio_flutter/themeprovider.dart';
+import 'package:portfolio_flutter/widgets/pagehead.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title, required this.isIos});
@@ -15,10 +18,13 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
 
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
+  customlaunchUrl(String url) async {
+    Uri _url = Uri.parse(url);
+    if (await canLaunchUrl(_url)) {
+      await launchUrl(_url);
+    } else {
+      throw 'No se pudo lanzar $url';
+    }
   }
 
   @override
@@ -55,33 +61,101 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Center(
           child: Column(
             children: <Widget>[
-              const SizedBox(height: 20), // Espacio en la parte superior
-              Container(
-                width: 200, // Ajusta el tamaño según tus necesidades
-                height: 200, // Ajusta el tamaño según tus necesidades
-                decoration: const BoxDecoration(
-                  image: DecorationImage(
-                    image: AssetImage(
-                        'ruta_a_tu_imagen_de_fondo_en_assets'), // Cambia esto por la ruta de tu imagen de fondo en los assets
-                    fit: BoxFit.cover,
+              // Espacio en la parte superior
+              Stack(
+                children: <Widget>[
+                  generateStackedImage(context),
+                  Center(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: <Widget>[
+                        const SizedBox(
+                            height:
+                                1), // Espacio entre el borde y el CircleAvatar
+                        const CircleAvatar(
+                          radius: 100,
+                          backgroundImage:
+                              AssetImage('lib/assets/iconbruno.png'),
+                        ),
+                        const SizedBox(height: 10),
+                        // Espacio entre el CircleAvatar y el texto
+                        const Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              'Bruno Vazquez',
+                              style: TextStyle(
+                                fontSize: 30,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                              ),
+                            ),
+                            Text(
+                              'Técnico Superior en Desarrollo de aplicaciones multiplataforma - Técnico de sistemas Microinformaticos',
+                              style: TextStyle(
+                                fontSize: 16,
+                                color: Colors.white,
+                              ),
+                              textAlign: TextAlign.center,
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 10),
+                        Card(
+                          child: Wrap(
+                            alignment: WrapAlignment.center,
+                            children: <Widget>[
+                              IconButton(
+                                onPressed: () async {
+                                  // Add your onPressed code here!
+                                  // Por ejemplo, puedes abrir un enlace a tu perfil de LinkedIn.
+                                  const url =
+                                      'https://www.linkedin.com/in/bruno-luis-vazquez-pais-881ba6281/';
+                                  await customlaunchUrl(url);
+                                },
+                                icon: const ImageIcon(
+                                    AssetImage('lib/assets/linkedin.png')),
+                              ),
+                              const SizedBox(width: 10),
+                              IconButton(
+                                onPressed: () async {
+                                  const url =
+                                      'https://www.instagram.com/brunoulis_/';
+                                  await customlaunchUrl(url);
+                                  // Add your onPressed code here!
+                                },
+                                icon: const ImageIcon(
+                                    AssetImage('lib/assets/instagram.png')),
+                              ),
+                              const SizedBox(width: 10),
+                              IconButton(
+                                onPressed: () async {
+                                  const url =
+                                      'https://www.twitter.com/brunoulis/';
+                                  await customlaunchUrl(url);
+                                  // Add your onPressed code here!
+                                },
+                                icon: const ImageIcon(
+                                    AssetImage('lib/assets/gorjeo.png')),
+                              ),
+                              const SizedBox(width: 10),
+                              IconButton(
+                                onPressed: () async {
+                                  const url = 'https://github.com/brunoulis';
+                                  await customlaunchUrl(url);
+                                },
+                                icon: const ImageIcon(
+                                    AssetImage('lib/assets/github.png')),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
-                  shape: BoxShape.circle,
-                ),
-                child: const CircleAvatar(
-                  radius: 100,
-                  backgroundImage: AssetImage(
-                      'ruta_a_tu_imagen_en_assets'), // Cambia esto por la ruta de tu imagen en los assets
-                ),
+                ],
               ),
               const SizedBox(height: 20), // Espacio después de la imagen
-              const Text(
-                'Bruno Vazquez',
-                style: TextStyle(
-                  fontSize: 22,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              const SizedBox(height: 20), // Espacio después del nombre
               // Aquí puedes seguir añadiendo más widgets que quieras mostrar en tu página de portfolio.
               const Wrap(
                 children: [
