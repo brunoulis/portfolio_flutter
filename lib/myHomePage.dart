@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'package:portfolio_flutter/themeprovider.dart';
-import 'package:portfolio_flutter/widgets/pagehead.dart';
+import 'package:portfolio_flutter/widgets/background_image_head.dart';
+import 'package:portfolio_flutter/widgets/others_widgets_head_page.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -65,94 +66,7 @@ class _MyHomePageState extends State<MyHomePage> {
               Stack(
                 children: <Widget>[
                   generateStackedImage(context),
-                  Center(
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: <Widget>[
-                        const SizedBox(
-                            height:
-                                1), // Espacio entre el borde y el CircleAvatar
-                        const CircleAvatar(
-                          radius: 100,
-                          backgroundImage:
-                              AssetImage('lib/assets/iconbruno.png'),
-                        ),
-                        const SizedBox(height: 10),
-                        // Espacio entre el CircleAvatar y el texto
-                        const Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              'Bruno Vazquez',
-                              style: TextStyle(
-                                fontSize: 30,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white,
-                              ),
-                            ),
-                            Text(
-                              'Técnico Superior en Desarrollo de aplicaciones multiplataforma - Técnico de sistemas Microinformaticos',
-                              style: TextStyle(
-                                fontSize: 16,
-                                color: Colors.white,
-                              ),
-                              textAlign: TextAlign.center,
-                            ),
-                          ],
-                        ),
-                        const SizedBox(height: 10),
-                        Card(
-                          child: Wrap(
-                            alignment: WrapAlignment.center,
-                            children: <Widget>[
-                              IconButton(
-                                onPressed: () async {
-                                  // Add your onPressed code here!
-                                  // Por ejemplo, puedes abrir un enlace a tu perfil de LinkedIn.
-                                  const url =
-                                      'https://www.linkedin.com/in/bruno-luis-vazquez-pais-881ba6281/';
-                                  await customlaunchUrl(url);
-                                },
-                                icon: const ImageIcon(
-                                    AssetImage('lib/assets/linkedin.png')),
-                              ),
-                              const SizedBox(width: 10),
-                              IconButton(
-                                onPressed: () async {
-                                  const url =
-                                      'https://www.instagram.com/brunoulis_/';
-                                  await customlaunchUrl(url);
-                                  // Add your onPressed code here!
-                                },
-                                icon: const ImageIcon(
-                                    AssetImage('lib/assets/instagram.png')),
-                              ),
-                              const SizedBox(width: 10),
-                              IconButton(
-                                onPressed: () async {
-                                  const url =
-                                      'https://www.twitter.com/brunoulis/';
-                                  await customlaunchUrl(url);
-                                  // Add your onPressed code here!
-                                },
-                                icon: const ImageIcon(
-                                    AssetImage('lib/assets/gorjeo.png')),
-                              ),
-                              const SizedBox(width: 10),
-                              IconButton(
-                                onPressed: () async {
-                                  const url = 'https://github.com/brunoulis';
-                                  await customlaunchUrl(url);
-                                },
-                                icon: const ImageIcon(
-                                    AssetImage('lib/assets/github.png')),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
+                  generateCenterWidget(context, customlaunchUrl),
                 ],
               ),
               const SizedBox(height: 20), // Espacio después de la imagen
@@ -160,7 +74,7 @@ class _MyHomePageState extends State<MyHomePage> {
               const Wrap(
                 children: [
                   Text(
-                    '¡Hola! Soy Bruno Vazquez, desarrollador de aplicaciones móviles y web. Me encanta aprender cosas nuevas y compartir mis conocimientos con los demás. Si tienes alguna pregunta, no dudes en contactarme.',
+                    '¡Hola! Soy Bruno Vazquez, desarrollador de aplicaciones móviles y web. \nMe encanta aprender cosas nuevas y compartir mis conocimientos con los demás.\n Si tienes alguna pregunta, no dudes en contactarme.',
                     style: TextStyle(
                       fontSize: 16,
                     ),
