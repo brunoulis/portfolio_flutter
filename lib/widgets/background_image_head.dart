@@ -2,11 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:portfolio_flutter/themeprovider.dart';
 import 'package:provider/provider.dart';
 
-
-
-
-
-Stack generateStackedImage(BuildContext context,String imageUbi) {
+Stack generateStackedImage(BuildContext context, String imageUbi) {
   return Stack(
     children: <Widget>[
       generaOutImage(context, imageUbi, 700),
@@ -19,11 +15,12 @@ Container gerateDegradeImage(BuildContext context, double heightImage) {
   return Container(
     height: heightImage,
     width: double.infinity,
-    decoration: generateBoxDecoration(context,255,5,255),
+    decoration: generateBoxDecoration(context, 255, 5, 255),
   );
 }
 
-BoxDecoration generateBoxDecoration(BuildContext context,int gradient1, int gradient2, int gradient3) {
+BoxDecoration generateBoxDecoration(
+    BuildContext context, int gradient1, int gradient2, int gradient3) {
   return BoxDecoration(
     gradient: LinearGradient(
       begin: Alignment.topCenter,
