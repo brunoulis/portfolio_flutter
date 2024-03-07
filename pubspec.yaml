@@ -38,6 +38,9 @@ dependencies:
   provider: ^6.1.1
   firebase_core: ^2.24.2
   url_launcher: ^6.2.5
+  cached_network_image: ^3.3.1
+  carousel_slider: ^4.2.1
+  infinite_carousel: ^1.1.1
 
 dev_dependencies:
   flutter_test:

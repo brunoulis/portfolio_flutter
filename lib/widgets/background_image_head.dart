@@ -2,11 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:portfolio_flutter/themeprovider.dart';
 import 'package:provider/provider.dart';
 
-Stack generateStackedImage(BuildContext context) {
+
+
+
+
+Stack generateStackedImage(BuildContext context,String imageUbi) {
   return Stack(
     children: <Widget>[
-      generaOutImage(context, 'lib/assets/fondo.jpg', 600),
-      gerateDegradeImage(context, 600),
+      generaOutImage(context, imageUbi, 700),
+      gerateDegradeImage(context, 700),
     ],
   );
 }

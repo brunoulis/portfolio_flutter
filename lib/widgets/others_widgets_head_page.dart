@@ -1,14 +1,16 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:portfolio_flutter/themeprovider.dart';
 import 'package:provider/provider.dart';
 
-Center generateCenterWidget(BuildContext context, Function customlaunchUrl) {
+Center generateCenterWidget(BuildContext context, Function customlaunchUrl,
+    String imageUbi, List<String> imgList) {
   return Center(
     child: Column(
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
         const SizedBox(height: 1), // Espacio entre el borde y el CircleAvatar
-        generateCircleAvatar('lib/assets/iconbruno.png'),
+        generateCircleAvatar(imageUbi, context),
         const SizedBox(height: 10),
         // Espacio entre el CircleAvatar y el texto
         Container(
@@ -42,52 +44,79 @@ Center generateCenterWidget(BuildContext context, Function customlaunchUrl) {
           child: Wrap(
             alignment: WrapAlignment.center,
             children: <Widget>[
-              IconButton(
-                onPressed: () async {
-                  // Add your onPressed code here!
-                  // Por ejemplo, puedes abrir un enlace a tu perfil de LinkedIn.
-                  const url =
-                      'https://www.linkedin.com/in/bruno-luis-vazquez-pais-881ba6281/';
-                  await customlaunchUrl(url);
-                },
-                icon: const ImageIcon(AssetImage('lib/assets/linkedin.png')),
-              ),
+              generateIconButton(
+                  'lib/assets/linkedin.png',
+                  'https://www.linkedin.com/in/bruno-luis-vazquez-pais-881ba6281/',
+                  customlaunchUrl),
               const SizedBox(width: 10),
-              IconButton(
-                onPressed: () async {
-                  const url = 'https://www.instagram.com/brunoulis_/';
-                  await customlaunchUrl(url);
-                  // Add your onPressed code here!
-                },
-                icon: const ImageIcon(AssetImage('lib/assets/instagram.png')),
-              ),
+              generateIconButton('lib/assets/instagram.png',
+                  'https://www.instagram.com/brunoulis_/', customlaunchUrl),
               const SizedBox(width: 10),
-              IconButton(
-                onPressed: () async {
-                  const url = 'https://www.twitter.com/brunoulis/';
-                  await customlaunchUrl(url);
-                  // Add your onPressed code here!
-                },
-                icon: const ImageIcon(AssetImage('lib/assets/gorjeo.png')),
-              ),
+              generateIconButton('lib/assets/gorjeo.png',
+                  'https://www.twitter.com/brunoulis/', customlaunchUrl),
               const SizedBox(width: 10),
-              IconButton(
-                onPressed: () async {
-                  const url = 'https://github.com/brunoulis';
-                  await customlaunchUrl(url);
-                },
-                icon: const ImageIcon(AssetImage('lib/assets/github.png')),
-              ),
+              generateIconButton('lib/assets/github.png',
+                  'https://github.com/brunoulis', customlaunchUrl)
             ],
           ),
+        ),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(
+                  bottom:
+                      10.0), // Ajusta este valor para cambiar el relleno inferior
+              child: Align(
+                alignment: Alignment.center,
+                child: generateText("Proyectos:", 20, Colors.white),
+              ),
+            ),
+            SizedBox(
+              height: 300, // Ajusta este valor según tus necesidades
+              width: MediaQuery.of(context)
+                  .size
+                  .width, // Ajusta este valor según tus necesidades
+              child: CarouselSlider(
+                options: CarouselOptions(
+                  autoPlay: true,
+                  autoPlayInterval: const Duration(seconds: 2),
+                ),
+                items: imgList.map((imageUrl) {
+                  return Builder(
+                    builder: (BuildContext context) {
+                      return Container(
+                        width: MediaQuery.of(context).size.width *
+                            0.5, // Ajusta este valor para cambiar el ancho del Container
+                        margin: const EdgeInsets.symmetric(horizontal: 5.0),
+                        child: Image.network(
+                          imageUrl,
+                          fit: BoxFit.scaleDown,
+                        ),
+                      );
+                    },
+                  );
+                }).toList(),
+              ),
+            )
+          ],
         ),
       ],
     ),
   );
 }
 
-Text generateText(String textfield, double size, Color? color) {
-  return Text(
+Center loadingWidget() {
+  return const Center(
+    child: CircularProgressIndicator(
+      valueColor:
+          AlwaysStoppedAnimation<Color>(Color.fromARGB(255, 145, 14, 2)),
+    ),
+  );
+}
+
+SelectableText generateText(String textfield, double size, Color? color) {
+  return SelectableText(
     textfield,
     style: TextStyle(
       fontSize: size,
@@ -96,11 +125,20 @@ Text generateText(String textfield, double size, Color? color) {
   );
 }
 
-RichText generateRichText(
+IconButton generateIconButton(
+    String imageUbi, String url, Function customlaunchUrl) {
+  return IconButton(
+    onPressed: () async {
+      await customlaunchUrl(url);
+    },
+    icon: ImageIcon(AssetImage(imageUbi)),
+  );
+}
+
+SelectableText generateRichText(
     String textfield1, String textfield2, double size, Color? color) {
-  return RichText(
-    textAlign: TextAlign.center,
-    text: TextSpan(
+  return SelectableText.rich(
+    TextSpan(
       style: TextStyle(
         fontSize: size,
         color: color,
@@ -115,12 +153,45 @@ RichText generateRichText(
         ),
       ],
     ),
+    textAlign: TextAlign.center,
   );
 }
 
-CircleAvatar generateCircleAvatar(String imageUbi) {
+//Pie de cabecera para poner el logo de flutter
+Positioned generatePositioned(BuildContext context) {
+  return Positioned(
+    bottom: 10,
+    right: 10,
+    child: Row(
+      children: <Widget>[
+        generateText(
+          'This design was created by brunoulis using ',
+          8,
+          Provider.of<ThemeProvider>(context).isDarkMode
+              ? Colors.white
+              : Colors.black,
+        ),
+        const FlutterLogo(size: 12),
+      ],
+    ),
+  );
+}
+
+CircleAvatar generateCircleAvatar(String imageUbi, BuildContext context) {
   return CircleAvatar(
     radius: 100,
     backgroundImage: AssetImage(imageUbi),
+    backgroundColor: Colors.transparent,
+    child: Container(
+      decoration: BoxDecoration(
+        border: Border.all(
+          color: Provider.of<ThemeProvider>(context).isDarkMode
+              ? const Color.fromARGB(255, 226, 205, 10)
+              : const Color.fromARGB(255, 145, 14, 2),
+          width: 4,
+        ),
+        shape: BoxShape.circle,
+      ),
+    ),
   );
 }

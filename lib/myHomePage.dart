@@ -5,6 +5,7 @@ import 'package:portfolio_flutter/widgets/background_image_head.dart';
 import 'package:portfolio_flutter/widgets/others_widgets_head_page.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title, required this.isIos});
@@ -18,6 +19,8 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
+  bool isLoading = true;
+  final PageController controller = PageController();
 
   customlaunchUrl(String url) async {
     Uri _url = Uri.parse(url);
@@ -26,6 +29,54 @@ class _MyHomePageState extends State<MyHomePage> {
     } else {
       throw 'No se pudo lanzar $url';
     }
+  }
+
+  final List<String> imgList = [
+    'lib/assets/linkedin.png',
+    'lib/assets/instagram.png',
+    'lib/assets/github.png',
+    // Agrega más URLs de imágenes si es necesario
+  ];
+
+  Padding _initButtomNavigationBar(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 15), // Ajusta el espaciado deseado
+      child: Container(
+        height: 40,
+        color: Colors.transparent,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            generateIconButton(
+                'lib/assets/linkedin.png',
+                'https://www.linkedin.com/in/bruno-luis-vazquez-pais-881ba6281/',
+                customlaunchUrl),
+            const SizedBox(width: 10),
+            generateIconButton('lib/assets/instagram.png',
+                'https://www.instagram.com/brunoulis_/', customlaunchUrl),
+            const SizedBox(width: 10),
+            generateIconButton('lib/assets/gorjeo.png',
+                'https://www.twitter.com/brunoulis/', customlaunchUrl),
+            const SizedBox(width: 10),
+            generateIconButton('lib/assets/github.png',
+                'https://github.com/brunoulis', customlaunchUrl)
+          ],
+        ),
+      ),
+    );
+  }
+
+  @override
+  void initState() {
+    super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      setState(() {
+        print('Cargando');
+
+        isLoading = false;
+      });
+    });
   }
 
   @override
@@ -58,34 +109,25 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ],
       ),
-      body: SingleChildScrollView(
-        child: Center(
-          child: Column(
-            children: <Widget>[
-              // Espacio en la parte superior
-              Stack(
-                children: <Widget>[
-                  generateStackedImage(context),
-                  generateCenterWidget(context, customlaunchUrl),
-                ],
-              ),
-              const SizedBox(height: 20), // Espacio después de la imagen
-              // Aquí puedes seguir añadiendo más widgets que quieras mostrar en tu página de portfolio.
-              const Wrap(
-                children: [
-                  Text(
-                    '¡Hola! Soy Bruno Vazquez, desarrollador de aplicaciones móviles y web. \nMe encanta aprender cosas nuevas y compartir mis conocimientos con los demás.\n Si tienes alguna pregunta, no dudes en contactarme.',
-                    style: TextStyle(
-                      fontSize: 16,
+      body: isLoading
+          ? loadingWidget()
+          : SingleChildScrollView(
+              child: Center(
+                child: Column(
+                  children: <Widget>[
+                    // Espacio en la parte superior
+                    Stack(
+                      children: <Widget>[
+                        generateStackedImage(context, 'lib/assets/fondo.jpg'),
+                        generateCenterWidget(context, customlaunchUrl,
+                            'lib/assets/iconbruno.png', imgList),
+                        generatePositioned(context),
+                      ],
                     ),
-                    textAlign: TextAlign.center,
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ],
-          ),
-        ),
-      ),
+            ),
     );
   }
 }
