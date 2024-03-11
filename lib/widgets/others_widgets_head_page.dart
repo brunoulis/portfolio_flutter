@@ -29,13 +29,12 @@ Center generateCenterWidget(BuildContext context, Function customlaunchUrl,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              generateText('Bruno Vazquez', 30, Colors.white),
-              generateRichText(
-                "Hola, soy Bruno Vazquez.",
-                "Apasionado de la programación,\n me defino por ser una persona con ganas de aprender y con una actitud perseverante y resolutiva.\n Buena comunicación, trabajo en equipo y capacidad de resolución de problemas.",
-                16,
-                Colors.white,
-              ),
+              generateText('Bruno Vazquez', 30, Colors.white, true,true),
+              generateText(
+                  "Técnico Superior en Desarrollo de aplicaciones multiplataforma\n  Técnico de sistemas Microinformaticos",
+                  16,
+                  Colors.white,
+                  false,true),
             ],
           ),
         ),
@@ -69,7 +68,7 @@ Center generateCenterWidget(BuildContext context, Function customlaunchUrl,
                       10.0), // Ajusta este valor para cambiar el relleno inferior
               child: Align(
                 alignment: Alignment.center,
-                child: generateText("Proyectos:", 20, Colors.white),
+                child: generateText("Proyectos:", 20, Colors.white, false,false),
               ),
             ),
             SizedBox(
@@ -115,12 +114,26 @@ Center loadingWidget() {
   );
 }
 
-SelectableText generateText(String textfield, double size, Color? color) {
+SelectableText generateText(String textfield, double size, Color? color,
+    bool weightfont, bool isCenter) {
   return SelectableText(
     textfield,
     style: TextStyle(
       fontSize: size,
       color: color,
+      fontWeight: weightfont ? FontWeight.w600 : FontWeight.normal,
+    ),
+    textAlign: isCenter ? TextAlign.center : TextAlign.start,
+  );
+}
+
+Card generateCard(
+  List<Widget> childrens,
+) {
+  return Card(
+    child: Wrap(
+      alignment: WrapAlignment.center,
+      children: childrens,
     ),
   );
 }
@@ -165,12 +178,12 @@ Positioned generatePositioned(BuildContext context) {
     child: Row(
       children: <Widget>[
         generateText(
-          'This design was created by brunoulis using ',
-          8,
-          Provider.of<ThemeProvider>(context).isDarkMode
-              ? Colors.white
-              : Colors.black,
-        ),
+            'This design was created by brunoulis using ',
+            8,
+            Provider.of<ThemeProvider>(context).isDarkMode
+                ? Colors.white
+                : Colors.black,
+            false,false),
         const FlutterLogo(size: 12),
       ],
     ),

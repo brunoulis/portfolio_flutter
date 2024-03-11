@@ -124,6 +124,29 @@ class _MyHomePageState extends State<MyHomePage> {
                         generatePositioned(context),
                       ],
                     ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    generateText(
+                        'Sobre mí',
+                        35,
+                        Provider.of<ThemeProvider>(context).isDarkMode
+                            ? Colors.white
+                            : Colors.black,
+                        true,
+                        false),
+                    const SizedBox(height: 20),
+                    generateCard(
+                      [
+                        generateRichText(
+                            'Hola, soy Bruno Vazquez. ',
+                            '\nApasionado de la programación,\n me defino por ser una persona con ganas de aprender  con una actitud perseverante y resolutiva.\n Buena comunicación, trabajo en equipo y capacidad de resolución de problemas.',
+                            20,
+                            Provider.of<ThemeProvider>(context).isDarkMode
+                                ? Colors.white
+                                : Colors.black),
+                      ],
+                    ),
                   ],
                 ),
               ),
